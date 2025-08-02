@@ -1,12 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi.responses import HTMLResponse
+from routes.room_routes import router as room_router
+import redis
 
 app = FastAPI()
 
-@app.get("/")
-def hello_world():
-    return {"Hello" : "World"}
 
-@app.get("/app/puzzle")
-def get_puzzle():
-    return {"Hello" : "World"}
+app.include_router(room_router, prefix="/api/rooms")
 
